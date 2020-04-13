@@ -42,5 +42,8 @@
     "webpack-dev-server": "^3.10.3",
     "webpack-stylish": "^0.1.8",
     "webpackbar": "^4.0.0"
+  },
+  "dependencies": {
+    "swiper": "^5.3.7"
   }
 }

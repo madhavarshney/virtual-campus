@@ -1,3 +1,5 @@
+import { Swiper } from 'swiper/js/swiper.esm';
+
 const scrollHideNavbar = false;
 // TODO: watch the following value
 let navHeight = document.querySelector('.navbar').getBoundingClientRect().height;
@@ -313,6 +315,9 @@ const tags = [
 ];
 
 const mql = window.matchMedia('(max-width: 768px)');
+const supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+const enableSwiper = supportsTouch;
+
 let mobile = mql.matches;
 mql.addListener((evt) => {
   mobile = evt.matches;
@@ -390,13 +395,16 @@ function createTag({ name, icon }) {
 
 function createClub(name, description) {
   let div = document.createElement('div');
+  if (enableSwiper) {
+    div.className = 'swiper-slide';
+  }
   div.innerHTML = `
     <div class="card">
       <div class="title">${name}</div>
       <div class="description">${description}</div>
     </div>
-`;
-  return div.children[0];
+  `;
+  return enableSwiper ? div : div.children[0];
 }
 
 let initStarted = false;
@@ -408,24 +416,37 @@ document.addEventListener('DOMContentLoaded', () => {
   const tagEls = tags.map((t) => createTag(t));
   document.getElementsByClassName('filters')[0].append(...tagEls);
 
-  if (false) {
+  if (enableSwiper) {
+    const swipers = [];
     const mainEls = tags.map((t) => {
       const container = document.createElement('div');
-      const el = document.createElement('div');
-      el.className = 'content';
       container.id = t.name;
       container.className = 'container';
+      container.innerHTML = `
+        <div class='section-title'>${t.name}</div>
+      `;
+
+      const el = document.createElement('div');
+      el.className = 'swiper-container';
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'swiper-wrapper';
+      el.appendChild(wrapper);
 
       const els = t.clubs.map((c) => createClub(c.name, c.mission));
-      container.innerHTML = `
-        <div class='title'>${t.name}</div>
-      `;
-      el.append(...els);
+      wrapper.append(...els);
       container.append(el);
+
+      swipers.push(new Swiper(el, {
+        init: false,
+        slidesPerView: 'auto',
+      }));
 
       return container;
     });
-    document.getElementById('clubs').append(...mainEls);
+
+    document.getElementById('club-container').append(...mainEls);
+    swipers.forEach((swiper) => swiper.init());
   } else {
     const mainEls = [];
     tags.forEach((t) => {

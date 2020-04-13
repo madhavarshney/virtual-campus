@@ -1,3 +1,8 @@
+import { Swiper } from 'swiper/js/swiper.esm';
+
+const supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+const enableSwiper = supportsTouch;
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
@@ -15,11 +20,11 @@ window.toggleHours = function toggleHours(elId) {
   }
 };
 
-function createCard({ name = '', description = '', zoomLink, hoursHtml, img }) {
+function createCard({ name = '', description = '', zoomLink, hoursHtml, img, placeholder = false }) {
   const el = document.createElement('div');
   el.id = name;
   el.className = 'card';
-  el.innerHTML = `
+  el.innerHTML = placeholder ? '' : `
     ${img ? `<div class="avatar"><img src=${img}></div>` : ''}
     <div class="title">${name}</div>
     <div class='room-info'>
@@ -34,7 +39,14 @@ function createCard({ name = '', description = '', zoomLink, hoursHtml, img }) {
       ${hoursHtml}
     </div>
   `;
-  return el;
+  if (enableSwiper) {
+    const slide = document.createElement('div');
+    slide.className = 'swiper-slide';
+    slide.appendChild(el);
+    return slide;
+  } else {
+    return el;
+  }
 }
 
 function generateHours(data) {
@@ -152,32 +164,10 @@ const data = {
       `,
     },
     {
-      name: 'Technology Hub 2',
-      zoomLink: 'https://cccconfer.zoom.us/j/950296669',
-      description: '',
-      hours: {},
-      hoursHtml: `
-        <div class='hours'>
-          <div class='hours-title'>Hours:</div><span>From</span><span>To</span>
-          <span>Mon – Thu:</span> <span>8 am</span> <span>11 am</span>
-          <span></span> <span>2 pm</span> <span>5 pm </span>
-          <span>Fri:</span> <span>9 am</span> <span>Noon</span>
-        </div>
-      `,
+      placeholder: true,
     },
     {
-      name: 'Technology Hub 3',
-      zoomLink: 'https://cccconfer.zoom.us/j/950296669',
-      description: '',
-      hours: {},
-      hoursHtml: `
-        <div class='hours'>
-          <div class='hours-title'>Hours:</div><span>From</span><span>To</span>
-          <span>Mon – Thu:</span> <span>8 am</span> <span>11 am</span>
-          <span></span> <span>2 pm</span> <span>5 pm </span>
-          <span>Fri:</span> <span>9 am</span> <span>Noon</span>
-        </div>
-      `,
+      placeholder: true,
     },
   ],
   stayConnected: [
@@ -208,19 +198,30 @@ const data = {
       `,
     },
     {
-    //   name: 'Chancellor\'s Open Office Hour with Judy Miner',
-    //   zoomLink: 'https://cccconfer.zoom.us/j/431174212',
-    //   description: 'Meet with Foothill President Thuy Nguyen! Get your questions answered and hear updates on the virtual campus and other news.',
-    //   hours: {},
-    //   hoursHtml: `
-    //     <div class=''>
-    //       <div class='hours-title'>Hours:</div>
-    //       <b>Wednesdays, March 25 – April 22 @ 11 AM</b>
-    //     </div>
-    //   `,
+      placeholder: true,
     },
   ],
 };
+
+function createSwiper(query, d) {
+  if (enableSwiper) {
+    const container = document.querySelector(`${query} .row`);
+    container.className = 'swiper-container'; // intentionally replace .row
+
+    const wrapper = document.createElement('wrapper');
+    wrapper.className = 'swiper-wrapper';
+    container.appendChild(wrapper);
+
+    wrapper.append(...d.map((c) => createCard(c)));
+    new Swiper(container, {
+      slidesPerView: 'auto',
+    });
+  } else {
+    document
+      .querySelector(`${query} .row`)
+      .append(...d.map((c) => createCard(c)));
+  }
+}
 
 let initStarted = false;
 
@@ -228,13 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (initStarted) { return; }
   initStarted = true;
 
-  document
-    .querySelector("#tutoring .row")
-    .append(...data.tutoring.map((c) => createCard(c)));
-  document
-    .querySelector("#tech-help .row")
-    .append(...data.techHelp.map((c) => createCard(c)));
-  document
-    .querySelector("#stay-connected .row")
-    .append(...data.stayConnected.map((c) => createCard(c)));
+  createSwiper('#tutoring', data.tutoring);
+  createSwiper('#tech-help', data.techHelp);
+  createSwiper('#stay-connected', data.stayConnected);
 });

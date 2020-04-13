@@ -1,3 +1,4 @@
+@import '../../node_modules/swiper/css/swiper.min.css';
 @import '../utils/base.css';
 
 $navbar-position-fixed: true;
@@ -41,7 +42,7 @@ body {
   @if $navbar-position-fixed {
     position: fixed;
     top: 0;
-    z-index: 1;
+    z-index: 2;
     width: 100%;
   }
 
@@ -308,9 +309,9 @@ aside {
     grid-gap: 16px;
     gap: 16px;
     grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-    padding-right: 4rem;
 
     @include tablet-up {
+      padding-right: 4rem;
       @if $navbar-position-fixed {
         // TODO: auto-calculate
         padding-top: 3.25rem;
@@ -356,11 +357,25 @@ aside {
     padding: 1rem 2rem;
   }
 }
-.content h2 {
-  margin-top: 0;
-  font-size: 2rem;
+// #content h2 {
+//   margin-top: 0;
+//   font-size: 2rem;
+// }
+
+.swiper-container {
+  margin: -2em -2em;
+  padding: 3em 2em;
+  // TODO: investigate possible regressions !!!
+  box-sizing: border-box;
 }
+.swiper-slide {
+  padding: 0 0.5em;
+  width: 90%;
+  height: auto;
+}
+
 .card {
+  box-sizing: border-box;
   flex: 1;
   height: 100%;
   padding: 2rem;
@@ -385,6 +400,11 @@ aside {
   font-weight: 700;
   margin-bottom: 0.5rem;
   text-align: center;
+}
+.card .description {
+  @include phone-down {
+    font-size: 1.1rem;
+  }
 }
 .card .room-info {
   font-size: 1.1rem;

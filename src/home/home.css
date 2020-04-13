@@ -1,3 +1,4 @@
+@import '../../node_modules/swiper/css/swiper.min.css';
 @import '../utils/base.css';
 
 .navbar {
@@ -110,7 +111,22 @@
   grid-gap: 16px;
   gap: 16px;
 }
+
+.swiper-container {
+  margin: -1.9em -1.9em;
+  padding: 3em 2em;
+  // TODO: investigate possible regressions !!!
+  box-sizing: border-box;
+}
+.swiper-slide {
+  padding: 0 0.5em;
+  width: 90%;
+  height: auto;
+}
+
 .card {
+  box-sizing: border-box;
+  height: 100%;
   padding: 2rem;
   background-color: white;
   border-radius: 8px;
