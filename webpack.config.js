@@ -22,9 +22,7 @@ const templateParams = {
   title: 'Virtual Campus',
   // NOTE: the following are custom parameters / this usage may break in the future
   description: `An easy-to-use information center for Foothill's virtual campus.`,
-  websiteUrl: prod
-    ? 'https://madhavarshney.github.io/virtual-campus'
-    : 'http://localhost:8080',
+  websiteUrl: prod ? '/virtual-campus/' : '/',
 };
 
 module.exports = {
@@ -84,13 +82,13 @@ module.exports = {
       chunks: ['home'],
       template: 'src/home/home.html',
       filename: 'index.html',
-      // ...templateParams,
+      ...templateParams,
     }),
     new HtmlWebpackPlugin({
       chunks: ['clubs'],
       template: 'src/clubs/clubs.html',
-      filename: 'clubs.html',
-      // ...templateParams,
+      filename: 'clubs/index.html',
+      ...templateParams,
     }),
     new MiniCssExtractPlugin({
       filename: prod ? '[name].[contenthash:8].css' : '[name].css',

@@ -1,8 +1,9 @@
 <meta charset="utf8" />
 <meta
   name="viewport"
-  content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
+  content="width=device-width, initial-scale=1, minimum-scale=1"
 />
+<base href="<%= htmlWebpackPlugin.options.websiteUrl %>" />
 <meta name="mobile-web-app-capable" content="yes" />
 <link
   rel="apple-touch-icon"
@@ -28,8 +29,8 @@
   color="#a61e2f"
 />
 <link rel="shortcut icon" href="assets/icon/favicon.ico" />
-<meta name="apple-mobile-web-app-title" content="Virtual Campus" />
-<meta name="application-name" content="Virtual Campus" />
+<meta name="apple-mobile-web-app-title" content="<%= htmlWebpackPlugin.options.title %>" />
+<meta name="application-name" content="<%= htmlWebpackPlugin.options.title %>" />
 <meta name="msapplication-TileColor" content="#a61e2f" />
 <meta name="msapplication-config" content="assets/browserconfig.xml" />
 <meta name="theme-color" content="#ffffff" />
