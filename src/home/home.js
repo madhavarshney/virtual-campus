@@ -22,24 +22,29 @@ window.toggleHours = function toggleHours(elId) {
 
 function createCard({ name = '', description = '', zoomLink, hoursHtml, img, placeholder = false }) {
   const el = document.createElement('div');
-  el.id = name;
-  el.className = 'card';
-  el.innerHTML = placeholder ? '' : `
-    ${img ? `<div class="avatar"><img src=${img}></div>` : ''}
-    <div class="title">${name}</div>
-    <div class='room-info'>
-      <strong>Room: </strong>
-      <a target='_blank' href='${zoomLink}'>
-        <button class='primary-action'>Join Zoom</button>
-      </a>
-      <button onclick="toggleHours('${name}')">Hours</button>
-    </div>
-    <div class="description">${description}</div>
-    <div class='hours-info'>
-      ${hoursHtml}
-    </div>
-  `;
+  if (!placeholder) {
+    el.id = name;
+    el.className = 'card';
+    el.innerHTML = `
+      ${img ? `<div class="avatar"><img src=${img}></div>` : ''}
+      <div class="title">${name}</div>
+      <div class='room-info'>
+        <strong>Room: </strong>
+        <a target='_blank' href='${zoomLink}'>
+          <button class='primary-action'>Join Zoom</button>
+        </a>
+        <button onclick="toggleHours('${name.replace('\'', '\\')}')">Hours</button>
+      </div>
+      <div class="description">${description}</div>
+      <div class='hours-info'>
+        ${hoursHtml}
+      </div>
+    `;
+  }
   if (enableSwiper) {
+    if (placeholder) {
+      return null;
+    }
     const slide = document.createElement('div');
     slide.className = 'swiper-slide';
     slide.appendChild(el);
@@ -212,7 +217,7 @@ function createSwiper(query, d) {
     wrapper.className = 'swiper-wrapper';
     container.appendChild(wrapper);
 
-    wrapper.append(...d.map((c) => createCard(c)));
+    wrapper.append(...d.map((c) => createCard(c)).filter((c) => c));
     new Swiper(container, {
       slidesPerView: 'auto',
     });

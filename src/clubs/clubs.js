@@ -155,7 +155,7 @@ const data = [
     "mission": "To foster a greater sense of community for Foothill’s theatre- minded students academically, recreationally, and socially"
   },
 
-  "Cultural",
+  "Ethnic & Cultural",
   {
     "name": "Black Student Union",
     "mission": "To support the betterment of students in their quest for empowerment, equality, politicial, social, and cultural means"
@@ -194,6 +194,10 @@ const data = [
     "name": "Honors Connection Club",
     "mission": "To provide members with opportunities to engage in academic and social activities with FH’s Honors Program"
   },
+  {
+    "name": "Foothill College Student Veterans of America",
+    "mission": "To establish and maintain a network of student veterans attending Foothill College"
+  },
 
 
   "Just for Fun!",
@@ -222,7 +226,7 @@ const data = [
   },
 
 
-  "Minorities",
+  "Underrepresented",
   {
     "name": "Define American Club",
     "mission": "To create an enriching and safe environment where undocumented students and allies can come together and share a common identity, stories and experiences"
@@ -235,11 +239,6 @@ const data = [
     "name": "We For She",
     "mission": "To advocate, educate, and discuss gender equality for women, the LGBTQ+ community, and men"
   },
-  {
-    "name": "Foothill College Student Veterans of America",
-    "mission": "To establish and maintain a network of student veterans attending Foothill College"
-  },
-
 
   "Leadership & Community",
   {
@@ -305,13 +304,13 @@ const tags = [
   { name: "Health", icon: "assets/clubs/filter_mathsci.svg" },
   { name: "Business & Economics", icon: "assets/clubs/filter_business.svg" },
   // { name: "Philosophy", icon: "assets/filter_philosophy.svg" },
-  { name: "Network", icon: "assets/clubs/filter_network.svg" },
-  { name: "Leadership & Community", icon: "assets/clubs/filter_leadership.svg" },
-  { name: "Social Impact", icon: "assets/clubs/filter_socialimpact.svg" },
   { name: "Just for Fun!", icon: "assets/clubs/filter_fun.svg" },
   { name: "Sports and Fitness", icon: "assets/clubs/filter_fitness.svg" },
-  { name: "Cultural", icon: "assets/clubs/filter_arts.svg" },
-  { name: "Minorities", icon: "assets/clubs/filter_arts.svg" },
+  { name: "Social Impact", icon: "assets/clubs/filter_socialimpact.svg" },
+  { name: "Leadership & Community", icon: "assets/clubs/filter_leadership.svg" },
+  { name: "Network", icon: "assets/clubs/filter_network.svg" },
+  { name: "Ethnic & Cultural", icon: "assets/clubs/filter_arts.svg" },
+  { name: "Underrepresented", icon: "assets/clubs/filter_arts.svg" },
 ];
 
 const mql = window.matchMedia('(max-width: 768px)');
