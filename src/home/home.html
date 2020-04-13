@@ -1,235 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
-    />
+    <%- include ../partials/meta.html -%>
     <title>Foothill Virtual Campus</title>
     <link
       href="https://fonts.googleapis.com/css?family=Nunito:300,400,700&display=swap"
       rel="stylesheet"
     />
-    <style>
-      *,
-      :after,
-      :before {
-        box-sizing: inherit;
-      }
-      html, button {
-        box-sizing: border-box;
-      }
-      html, button {
-        font-family: Nunito, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-          Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
-          sans-serif;
-      }
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        overflow-x: hidden;
-        background-color: rgb(240, 240, 240);
-      }
-      @media screen and (max-width: 420px) {
-        html {
-          font-size: 14px;
-        }
-      }
-      .header {
-        /* height: 80vh; */
-        width: 100%;
-        /* padding: 0 0 4rem 0; */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        background-image: url('file:///Users/madhav/Downloads/untitled%20(7).svg'),
-          /* linear-gradient(73deg, #3aa83f, #b83ab8); */
-            /* linear-gradient(73deg, #3369e7, #00aeff); */
-            /* linear-gradient(73deg, #ae122a, #ae122980); */
-            /* linear-gradient(73deg, #A61E2F, #ae122980); */
-            /* linear-gradient(90deg, #A61E2F, #ae122980); */
-            linear-gradient(90deg, #921b29, #bb2234);
-        background-position: 50%;
-        background-size: cover;
-        color: white;
-      }
-      .header .title {
-        font-size: 2.5rem;
-        font-weight: 700;
-      }
-      .header .question {
-        font-size: 1.5rem;
-      }
-      .header .quicknav {
-        margin: 0 -3rem;
-        padding: 1rem 0;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(10em, auto));
-        justify-content: center;
-        gap: 1em;
-      }
-      .quicknav button {
-        padding: 0.8rem 2rem;
-        /* background-color: #4495D1; */
-        background-color: white;
-        /* background-color: #FFC82E; */
-        font-size: 1rem;
-        /* color: white; */
-        border: none;
-        outline: none;
-        border-radius: 8px;
-        /* margin: 0 8px; */
-        width: 100%;
-        cursor: pointer;
-        box-shadow: 0 0.175em 0.6em 0 rgba(19,38,97,.4);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        transition: background-color 0.2s, color 0.2s;
-      }
-      .quicknav button:hover {
-        color: white;
-        background-color: #58B947;
-        /* background-color: #4495D1; */
-        /* background-color: #FFC82EAA; */
-      }
-      .quicknav a {
-        text-decoration: none;
-        color: inherit;
-      }
-      .quicknav button svg {
-        width: 5em;
-        height: 5rem;
-        margin-bottom: 1rem;
-      }
-      .navbar {
-        display: flex;
-        padding: 1rem 1rem;
-        width: 100%;
-      }
-      .navbar img {
-        /* background-color: white; */
-        height: 2rem;
-      }
-      .navbar button {
-        outline: none;
-        border: none;
-        background: none;
-        cursor: pointer;
-        padding: 0.5rem 1rem;
-      }
-      .navbar button:hover {
-        background-color: rgb(0, 0, 0, 0.2);
-      }
-      .banner {
-        width: 100%;
-        padding: 0 1rem;
-      }
-      .content {
-        padding: 0rem 4rem 4rem 4rem;
-      }
-      @media screen and (max-width: 420px) {
-        .content {
-          padding: 1rem 2rem;
-        }
-      }
-      .content h2 {
-        margin-top: 0;
-        font-size: 2rem;
-      }
-      .row {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-        grid-gap: 16px;
-        gap: 16px;
-      }
-      .card {
-        padding: 2rem;
-        background-color: white;
-        border-radius: 8px;
-        flex: 1;
-        line-height: 1.8;
-        transition: transform .2s, box-shadow .2s, -webkit-transform .2s;
-        box-shadow: 0 10px 40px 0 rgba(62,57,107,.07), 0 2px 9px 0 rgba(62,57,107,.06);
-      }
-      .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 16px 32px 0 rgba(62,57,107,.28), 0 0 0 transparent;
-        /* -webkit-box-shadow: 0px 0px 5px 0px rgba(125,125,125,0.75);
-        -moz-box-shadow: 0px 0px 5px 0px rgba(125,125,125,0.75);
-        box-shadow: 0px 0px 5px 0px rgba(125,125,125,0.75); */
-      }
-      .card .title {
-        font-size: 1.4rem;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
-        text-align: center;
-      }
-      .card .hours-info {
-        padding-top: 1rem;
-      }
-      .card .hours {
-        display: grid;
-        grid-template-columns: repeat(3, auto);
-        grid-gap: 1rem;
-        gap: 0.5rem 1rem;
-      }
-      .card .hours-title {
-        font-size: 1.1rem;
-        font-weight: 700;
-        padding-bottom: 0.5rem;
-      }
-      .card .room-info {
-        font-size: 1.1rem;
-      }
-      .card .room-info button {
-        color: white;
-        background-color: #58B947;
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
-        margin-left: 0.5rem;
-        cursor: pointer;
-        outline: none;
-        border: none;
-      }
-      .card .room-info button a {
-        text-decoration: none;
-        color: white;
-      }
-      .footer {
-        margin-top: 0;
-        padding: 0 2rem 4rem 2rem;
-        background-color: #273036;
-        color: rgb(150, 150, 150);
-        text-align: center;
-      }
-      .footer-svg {
-        width: 100%;
-        height: 10rem;
-      }
-      svg {
-        display: block;
-      }
-      .modal {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        overscroll-behavior: contain;
-      }
-      .modal-content {
-        background-color: white;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-    </style>
   </head>
   <body>
     <div class="header">
@@ -260,10 +37,16 @@
               Services
             </button>
           </a>
+          <a href="clubs.html">
+            <button>
+              <svg viewBox="-1 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m500 65c0 35.898438-29.101562 65-65 65s-65-29.101562-65-65 29.101562-65 65-65 65 29.101562 65 65zm0 0" fill="#ff9e90"/><path d="m140 65c0 35.898438-29.101562 65-65 65s-65-29.101562-65-65 29.101562-65 65-65 65 29.101562 65 65zm0 0" fill="#ffcad6"/><path d="m510 325v187h-60v-202zm0 0" fill="#5b3364"/><path d="m420 310v202h-60v-187zm0 0" fill="#ad2666"/><path d="m330 160 30 165h150v-165zm0 0" fill="#ff4377"/><path d="m255 0-32.5 65 32.5 65c35.898438 0 65-29.101562 65-65s-29.101562-65-65-65zm0 0" fill="#ff876c"/><path d="m190 65c0 35.898438 29.101562 65 65 65v-130c-35.898438 0-65 29.101562-65 65zm0 0" fill="#ff9e90"/><path d="m390 220v105c0 16.570312-13.429688 30-30 30s-30-13.429688-30-30l-50-82.5 50-82.5c33.136719 0 60 26.863281 60 60zm0 0" fill="#ff8b2a"/><path d="m180 325v187h60v-202zm0 0" fill="#ff8b2a"/><path d="m270 310v202h60v-187zm0 0" fill="#ff6e2e"/><path d="m330 160h-75l-35 90 35 75h75zm0 0" fill="#ffa725"/><path d="m150 160 30 165h75v-165zm0 0" fill="#ffbe46"/><path d="m210 220v105c0 16.570312-13.429688 30-30 30s-30-13.429688-30-30l-50-82.5 50-82.5c33.136719 0 60 26.863281 60 60zm0 0" fill="#26abff"/><path d="m0 325v187h60v-202zm0 0" fill="#26abff"/><path d="m90 310v202h60v-187zm0 0" fill="#2196dc"/><path d="m0 160h150v165h-150zm0 0" fill="#4cbeff"/><path d="m255 0-32.5 65 32.5 65c35.898438 0 65-29.101562 65-65s-29.101562-65-65-65zm0 0" fill="#ff9592"/><path d="m190 65c0 35.898438 29.101562 65 65 65v-130c-35.898438 0-65 29.101562-65 65zm0 0" fill="#ffbe9f"/><path d="m140 65c0 35.898438-29.101562 65-65 65s-65-29.101562-65-65 29.101562-65 65-65 65 29.101562 65 65zm0 0" fill="#ffbe9f"/><path d="m500 65c0 35.898438-29.101562 65-65 65s-65-29.101562-65-65 29.101562-65 65-65 65 29.101562 65 65zm0 0" fill="#732a04"/></svg>
+              Clubs
+            </button>
+          </a>
         </div>
       </div>
     </div>
-    <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+    <svg class='header-svg' preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
       <defs>
         <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
           <!-- <stop offset="0%" style="stop-color:#A61E2F;stop-opacity:1" />
@@ -276,67 +59,15 @@
     </svg>
     <div id='tutoring' class="content">
       <div><h2>Tutoring</h2></div>
-      <div class="row">
-        <div class='card'>
-          <div class="title">STEM Center</div>
-          <div class='room-info'>
-            <strong>Room: </strong>
-            <a target='_blank' href='https://cccconfer.zoom.us/j/378611456'>
-              <button>Join Zoom</button>
-            </a>
-          </div>
-          <div class='hours-info'>
-            <div class='hours'>
-                <div class='hours-title'>Hours:</div><span>From</span><span>To</span>
-                <!-- <span>Mon – Thu:</span> <span>9 am – 9 pm</span>
-                <span></span> <span>9 pm – 12 midnight (CS Only)</span>
-                <span>Fri:</span> <span>9 am – 3 pm</span>
-                <span>Sat:</span> <span>11 am – 5 pm</span>
-                <span>Sun:</span> <span>12 noon – 12 midnight (CS Only)</span> -->
-                <span>Mon – Thu:</span> <span>9 am</span> <span>9 pm</span>
-                <span></span> <span>9 pm</span> <span>12 midnight<br>(CS Only)</span>
-                <span>Fri:</span> <span>9 am</span> <span>3 pm</span>
-                <span>Sat:</span> <span>11 am</span> <span>5 pm</span>
-                <span>Sun:</span> <span>12 noon</span> <span>12 midnight<br>(CS Only)</span>
-            </div>
-          </div>
-        </div>
-        <div class='card'>
-          <div class="title">Teaching & Learning Center</div>
-        </div>
-        <div class='card'>
-          <div class="title">Virtual Library</div>
-        </div>
-      </div>
+      <div class="row"></div>
     </div>
     <div id='tech-help' class="content">
       <div><h2>Tech Help</h2></div>
-      <div class="row">
-        <div class='card'>
-          <div class="title">Virtual Student Technology Hub</div>
-          <div></div>
-          <div class='room-info'>
-            <strong>Room: </strong>
-            <a target='_blank' href='https://cccconfer.zoom.us/j/950296669'>
-              <button>Join Zoom</button>
-            </a>
-          </div>
-          <div class='hours-info'>
-            <div class='hours'>
-                <div class='hours-title'>Hours:</div><span>From</span><span>To</span>
-                <span>Mon – Thu:</span> <span>8 am</span> <span>11 am</span>
-                <span></span> <span>2 pm</span> <span>5 pm </span>
-                <span>Fri:</span> <span>9 am</span> <span>Noon</span>
-            </div>
-          </div>
-        </div>
-        <div class='card'>
-          <div class="title">Teaching & Learning Center</div>
-        </div>
-        <div class='card'>
-          <div class="title">Virtual Library</div>
-        </div>
-      </div>
+      <div class="row"></div>
+    </div>
+    <div id='stay-connected' class="content">
+      <div><h2>Stay Connected!</h2></div>
+      <div class="row"></div>
     </div>
     <div id='services' class="content">
       <div><h2>Services</h2></div>
@@ -370,16 +101,6 @@
     <footer class='footer'>
       Website by Madhav Varshney
     </footer>
-    <script>
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-
-          document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-          });
-        });
-      });
-    </script>
+    <script async src='https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js'></script>
   </body>
 </html>

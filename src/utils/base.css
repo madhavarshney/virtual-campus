@@ -1,0 +1,71 @@
+$theme-gradient: linear-gradient(90deg, #921b29, #bb2234);
+/* linear-gradient(73deg, #3aa83f, #b83ab8); */
+/* linear-gradient(73deg, #3369e7, #00aeff); */
+/* linear-gradient(73deg, #ae122a, #ae122980); */
+/* linear-gradient(73deg, #A61E2F, #ae122980); */
+/* linear-gradient(90deg, #A61E2F, #ae122980); */
+$theme-primary: #58B947;
+$theme-footer: #273036;
+$theme-footer-text: #969696;
+
+*,
+:after,
+:before {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  overflow-x: hidden;
+
+  @media screen and (max-width: 420px) {
+    font-size: 14px;
+  }
+}
+
+html,
+button {
+  font-family: Nunito, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: rgb(240, 240, 240);
+}
+
+@mixin tablet-up {
+  @media (min-width: 768px) { @content; }
+}
+@mixin tablet-down {
+  @media (max-width: 767.98px) { @content; }
+}
+@mixin phone-down {
+  @media (max-width: 420px) { @content; }
+}
+
+@mixin reset-button {
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+// @mixin for-phone-only {
+//   @media (max-width: 599px) { @content; }
+// }
+// @mixin for-tablet-portrait-up {
+//   @media (min-width: 600px) { @content; }
+// }
+// @mixin for-tablet-landscape-up {
+//   @media (min-width: 900px) { @content; }
+// }
+// @mixin for-desktop-up {
+//   @media (min-width: 1200px) { @content; }
+// }
+// @mixin for-big-desktop-up {
+//   @media (min-width: 1800px) { @content; }
+// }

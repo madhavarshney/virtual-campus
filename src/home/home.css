@@ -1,0 +1,230 @@
+@import '../utils/base.css';
+
+.navbar {
+  display: flex;
+  // padding: 1rem 1rem;
+  padding: 0.5rem 1rem;
+  width: 100%;
+}
+.navbar img {
+  /* background-color: white; */
+  height: 2rem;
+}
+.navbar button {
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+.navbar button:hover {
+  background-color: rgb(0, 0, 0, 0.2);
+}
+.banner {
+  width: 100%;
+  padding: 0 1rem;
+}
+.header {
+  /* height: 80vh; */
+  width: 100%;
+  /* padding: 0 0 4rem 0; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: $theme-gradient;
+  background-position: 50%;
+  background-size: cover;
+  color: white;
+}
+.header .title {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+.header .question {
+  font-size: 1.5rem;
+}
+.header-svg {
+  width: 100%;
+  // TODO: investigate whether vw is the best unit
+  height: 20vw;
+}
+.header .quicknav {
+  // margin: 0 -3rem;
+  padding: 1rem 0;
+  display: grid;
+  // TODO: investigate alternative
+  // NOTE: 0.5rem is subtracted for having two rows on iPhone SE
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, auto));
+  justify-content: center;
+  gap: 1em;
+  grid-gap: 1em;
+}
+.quicknav button {
+  @include reset-button;
+
+  padding: 0.8rem 2rem;
+  background-color: white;
+  /* background-color: #4495D1; */
+  /* background-color: #FFC82E; */
+  /* color: white; */
+  border-radius: 8px;
+  /* margin: 0 8px; */
+  width: 100%;
+  box-shadow: 0 0.175em 0.6em 0 rgba(19,38,97,.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, color 0.2s;
+}
+.quicknav button:hover {
+  color: white;
+  background-color: $theme-primary;
+  /* background-color: #4495D1; */
+  /* background-color: #FFC82EAA; */
+}
+.quicknav a {
+  text-decoration: none;
+  color: inherit;
+}
+.quicknav button svg {
+  width: 5em;
+  height: 5rem;
+  margin-bottom: 1rem;
+}
+.content {
+  padding: 0rem 4rem 4rem 4rem;
+  @include phone-down {
+    padding: 1rem 1.5rem;
+  }
+}
+.content h2 {
+  margin-top: 0;
+  font-size: 2rem;
+}
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(21rem, 1fr));
+  grid-gap: 16px;
+  gap: 16px;
+}
+.card {
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  flex: 1;
+  line-height: 1.8;
+  transition: transform .2s, box-shadow .2s, -webkit-transform .2s;
+  box-shadow: 0 10px 40px 0 rgba(62,57,107,.07), 0 2px 9px 0 rgba(62,57,107,.06);
+
+  @include phone-down {
+    padding: 2rem 1.5rem;
+  }
+}
+@include tablet-up {
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 32px 0 rgba(62,57,107,.28), 0 0 0 transparent;
+    /* -webkit-box-shadow: 0px 0px 5px 0px rgba(125,125,125,0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(125,125,125,0.75);
+    box-shadow: 0px 0px 5px 0px rgba(125,125,125,0.75); */
+  }
+}
+.card .avatar {
+  width: 100%;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+.card img {
+  width: 30%;
+  border-radius: 50%;
+}
+.card .title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.card .description {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+.card .hours-info {
+  padding-top: 1rem;
+}
+.card.hours-visible .hours {
+  max-height: 400px;
+}
+.card .hours {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-gap: 1rem;
+  gap: 0.5rem 1rem;
+
+  max-height: 0;
+  transition: max-height 0.5s ease-in-out;
+  overflow: hidden;
+}
+.card .hours-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding-bottom: 0.5rem;
+}
+.card .room-info {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+.card button {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: #ddd;
+  transition: background-color .1s;
+}
+.card button:hover {
+  background-color: #ccc;
+}
+.card .primary-action {
+  color: white;
+  background-color: $theme-primary;
+}
+.card .primary-action:hover {
+  background-color: rgb(71, 148, 57);
+}
+.card a {
+  text-decoration: none;
+  color: white;
+}
+.footer {
+  margin-top: 0;
+  background-color: $theme-footer;
+  color: $theme-footer-text;
+  text-align: center;
+
+  padding: 0 2rem 4rem 2rem;
+}
+.footer-svg {
+  width: 100%;
+  height: 10rem;
+}
+svg {
+  display: block;
+}
+.modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overscroll-behavior: contain;
+}
+.modal-content {
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
