@@ -1,0 +1,20 @@
+
+.scroll-down .navbar {
+  transform: translate3d(0, -100%, 0);
+  background: linear-gradient(90deg, #921b29, #bb2234);
+}
+
+.scroll-up .navbar {
+  transform: none;
+}
+
+.scroll-up:not(.menu-open) .navbar {
+  background: linear-gradient(90deg, #921b29, #bb2234);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
+}
+
+.club-in-view.scroll-up .aside-content {
+  // padding-top: 6rem;
+  // transform: translateY(5rem);
+  transform: translate3d(0, 5rem, 0);
+}

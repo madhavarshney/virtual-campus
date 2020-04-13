@@ -1,0 +1,433 @@
+@import '../utils/base.css';
+
+$navbar-position-fixed: true;
+$navbar-hide-on-scroll: false;
+$horizontal-scroll: false;
+
+html, body {
+  height: 100%;
+}
+body {
+  @if $navbar-position-fixed == false {
+    display: flex;
+    flex-direction: column;
+  } @else {
+    @include tablet-up {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      overflow: auto;
+    }
+  }
+}
+@if $navbar-position-fixed == false {
+  main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    overflow: auto;
+  }
+}
+
+@if $navbar-hide-on-scroll {
+  @import '../utils/stickyHeader.css';
+}
+
+.navbar {
+  display: flex;
+  // padding: 1rem 1rem;
+  padding: 0.5rem 1rem;
+  width: 100%;
+
+  @if $navbar-position-fixed {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+  }
+
+  @if $navbar-hide-on-scroll {
+    transition: transform 0.4s;
+  }
+  @else {
+    background: $theme-gradient;
+  }
+}
+.navbar img {
+  /* background-color: white; */
+  height: 2rem;
+}
+.navbar button {
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  color: white;
+}
+.navbar button:hover {
+  background-color: rgb(0, 0, 0, 0.2);
+}
+
+.banner {
+  width: 100%;
+  padding: 0 1rem;
+  @if $navbar-position-fixed {
+    padding-top: 3rem;
+  }
+}
+.header {
+  /* height: 80vh; */
+  width: 100%;
+  grid-column: 1 / -1;
+  /* padding: 0 0 4rem 0; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: $theme-gradient;
+  background-position: 50%;
+  background-size: cover;
+  color: white;
+}
+.header .title {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+.header .question {
+  font-size: 1.5rem;
+}
+.header svg {
+  width: 100%;
+  // TODO: investigate whether vw is the best unit
+  height: 10vw;
+}
+
+.quicknav {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0 3rem 0;
+
+  display: grid;
+  // TODO: investigate alternative
+  // NOTE: 0.5rem is subtracted for having two rows on iPhone SE
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, auto));
+  justify-content: center;
+  gap: 1em;
+  grid-gap: 1em;
+}
+.quicknav button {
+  @include reset-button;
+
+  padding: 0.8rem 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0.175em 0.6em 0 rgba(19,38,97,.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, color 0.2s;
+}
+.quicknav button:hover {
+  color: white;
+  background-color: $theme-primary;
+}
+.quicknav a {
+  text-decoration: none;
+  color: white;
+}
+.quicknav button svg {
+  width: 5em;
+  height: 5rem;
+  margin-bottom: 1rem;
+}
+.quicknav .primary-btn {
+  color: white;
+  background-color: $theme-primary;
+}
+
+// main {
+//   padding: 0rem 4rem 4rem 4rem;
+//   display: flex;
+// }
+aside {
+  grid-column: 1 / 2;
+  padding: 0 3rem;
+  /* width: 30vw; */
+
+  @include tablet-down {
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 2rem 2rem;
+    transition: visibility 0.2s, opacity 0.2s, transform 0.2s;
+    background-color: white;
+    overflow: auto;
+    overscroll-behavior: contain;
+
+    /* display: none; */
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(1rem);
+
+    &.visible {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+.aside-content {
+  padding: 2rem 0.75rem;
+
+  @if $navbar-hide-on-scroll {
+    // transition: padding-top 0.4s;
+    will-change: transform;
+    transition: transform 0.4s;
+    // TODO: fix
+    height: 100vh;
+  }
+  @else {
+    // TODO: fix
+    height: calc(100vh - 4.25rem);
+    @if $navbar-position-fixed {
+      // TODO: fix
+      height: 100vh;
+      @include tablet-up {
+        padding-top: 5.25rem;
+      }
+    }
+  }
+
+  @include tablet-up {
+    position: sticky;
+    top: 0;
+    overflow: auto;
+  }
+  @include tablet-down {
+    padding: 0.5rem;
+  }
+}
+.toolbar {
+  display: flex;
+  flex-direction: row;
+}
+.toolbar .title {
+  flex: 1;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.toolbar .close {
+  display: none;
+  cursor: pointer;
+}
+.filter-toggle {
+  font-size: 1rem;
+  display: none;
+}
+
+.filters {
+  /* margin: 0 -3rem; */
+  padding: 1rem 0;
+  /* display: grid; */
+  /* grid-template-columns: 6em; */
+  justify-content: center;
+  /* gap: 1em; */
+}
+// .filters div {
+//   overflow: hidden;
+// }
+.filters button {
+  /* white-space: nowrap; */
+  text-align: left;
+  padding: 0.7rem;
+  background-color: transparent;
+  /* background-color: white; */
+  font-size: 0.9rem;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  width: 100%;
+  min-width: 14rem;
+  cursor: pointer;
+  /* box-shadow: 0 0.175em 0.6em 0 rgba(19,38,97,.4); */
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  /* justify-content: center; */
+  transition: background-color 0.2s, color 0.2s;
+}
+.filters button:hover {
+  color: white;
+  background-color: $theme-primary;
+  /* background-color: #4495D1; */
+  /* background-color: #FFC82EAA; */
+}
+.filters button svg, .filters button img {
+  width: 2em;
+  height: 2rem;
+  margin-right: 1rem;
+  /* margin-bottom: 0.5rem; */
+}
+.filters button span {
+  flex: 1;
+}
+
+@include tablet-down {
+  // main {
+  //   padding: 0rem 1rem 4rem 1rem;
+  // }
+  .filter-toggle {
+    display: block;
+  }
+  .filters {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+  }
+  .filters button {
+    text-overflow: ellipses;
+    min-width: unset;
+  }
+  .toolbar .close {
+    display: block;
+  }
+}
+
+@if $horizontal-scroll == false {
+  #club-container {
+    grid-column: 2 / -1;
+    max-width: 100%;
+    display: grid;
+    grid-auto-columns: 18rem;
+    grid-gap: 16px;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    padding-right: 4rem;
+
+    @include tablet-up {
+      @if $navbar-position-fixed {
+        // TODO: auto-calculate
+        padding-top: 3.25rem;
+      }
+    }
+
+    @include tablet-down {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      /* max-width: calc(100% - 14rem); */
+    }
+    // @media (min-width: 768px) {
+    //   max-width: calc(100% - 14rem);
+    // }
+  }
+}
+#club-container .section-title, #clubs .section-title {
+  font-size: 2rem;
+  grid-column: 1 / -1;
+  padding: 1.5rem 0;
+}
+.content {
+  margin-bottom: 2rem;
+  padding: 2rem 0;
+  /* padding: 0rem 4rem 4rem 4rem; */
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+
+  @if $horizontal-scroll {
+    display: grid;
+    grid-auto-columns: 20rem;
+    grid-gap: 16px;
+    gap: 16px;
+  }
+}
+@include phone-down {
+  .content {
+    grid-template-columns: unset;
+    /* padding: 2rem; */
+    scroll-snap-type: x mandatory;
+    grid-auto-flow: column;
+    overflow: auto;
+    scroll-behavior: auto;
+    padding: 1rem 2rem;
+  }
+}
+.content h2 {
+  margin-top: 0;
+  font-size: 2rem;
+}
+.card {
+  flex: 1;
+  height: 100%;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  line-height: 1.8;
+  transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 10px 40px 0 rgba(62,57,107,.07), 0 2px 9px 0 rgba(62,57,107,.06);
+
+  scroll-snap-align: start;
+  /* min-width: 30vw; */
+}
+@include tablet-up {
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 32px 0 rgba(62,57,107,.28), 0 0 0 transparent;
+    // box-shadow: 0px 0px 5px 0px rgba(125,125,125,0.75);
+  }
+}
+.card .title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+.card .room-info {
+  font-size: 1.1rem;
+}
+.card .room-info button {
+  color: white;
+  background-color: $theme-primary;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+.card .room-info button a {
+  text-decoration: none;
+  color: white;
+}
+.footer {
+  margin-top: 4rem;
+  background-color: $theme-footer;
+  color: $theme-footer-text;
+  text-align: center;
+  padding: 4rem 2rem 4rem 2rem;
+  grid-column: 1 / -1;
+}
+.footer-svg {
+  width: 100%;
+  height: 10rem;
+}
+svg {
+  display: block;
+}
+.modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overscroll-behavior: contain;
+}
+.modal-content {
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
