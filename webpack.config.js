@@ -9,6 +9,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const mode = process.env.NODE_ENV || 'development';
+const base = process.env.BASE_PATH || '/';
 const prod = mode === 'production';
 
 const stats = {
@@ -22,7 +23,7 @@ const templateParams = {
   title: 'Virtual Campus',
   // NOTE: the following are custom parameters / this usage may break in the future
   description: `An easy-to-use information center for Foothill's virtual campus.`,
-  websiteUrl: prod ? '/virtual-campus/' : '/',
+  websiteUrl: base,
 };
 
 module.exports = {
@@ -35,7 +36,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: prod ? '[name].[contenthash:8].js' : '[name].js',
-    publicPath: prod ? '/virtual-campus/' : '/',
+    publicPath: base,
   },
   resolve: {},
   module: {
