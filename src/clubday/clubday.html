@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ../partials/meta.html -%>
+    <title>Club Day Spring 2020</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:300,400,700&amp;display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section class="first">
+      <nav>
+        <a href='/'>Home</a>
+        <span class="spacer"></span>
+        <span>About</span>
+      </nav>
+      <div class="info">
+        <h1>Club Day - Spring 2020</h1>
+        <!-- <p>Scroll down to get started...</p> -->
+        <p>Choose a Room:</p>
+        <div class='rooms'></div>
+      </div>
+      <div class="path">
+        <div class="dashed-line"></div>
+      </div>
+    </section>
+    <main>
+      <div class="path">
+        <div class="dashed-line"></div>
+      </div>
+      <div class="you">You</div>
+    </main>
+    <footer>
+      <div>Website by Madhav Varshney</div>
+    </footer>
+    <div class="modal">
+      <div id="jitsi"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://meet.jit.si/external_api.js"></script>
+    <script async src='https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js'></script>
+  </body>
+</html>

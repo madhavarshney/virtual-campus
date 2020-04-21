@@ -31,6 +31,7 @@ module.exports = {
   entry: {
     home: ['./src/home/home.css', './src/home/home.js'],
     clubs: ['./src/clubs/clubs.css', './src/clubs/clubs.js'],
+    clubday: ['./src/clubday/clubday.css', './src/clubday/clubday.js'],
   },
   devtool: prod ? false : 'inline-source-map',
   output: {
@@ -90,6 +91,12 @@ module.exports = {
       chunks: ['clubs'],
       template: 'src/clubs/clubs.html',
       filename: 'clubs/index.html',
+      ...templateParams,
+    }),
+    new HtmlWebpackPlugin({
+      chunks: ['clubday'],
+      template: 'src/clubday/clubday.html',
+      filename: 'club-day/index.html',
       ...templateParams,
     }),
     new MiniCssExtractPlugin({
