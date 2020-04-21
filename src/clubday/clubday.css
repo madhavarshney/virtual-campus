@@ -96,6 +96,10 @@ html, body {
     box-shadow: 0px 20px 20px 0px rgba(220,220,220,1);
     display: flex;
     justify-content: center;
+
+    @include tablet-down {
+        display: none;
+    }
 }
 .dashed-line {
     width: 4px;
@@ -172,7 +176,9 @@ main section {
     width: 100%;
     // // TODO: confirm this is a good value
     // max-width: 1200px;
-    display: flex;
+    @include phone-up {
+        display: flex;
+    }
 }
 /* TODO: add selector */
 .panel > div:not(.spacer) {
@@ -185,6 +191,9 @@ main section {
 .panel .spacer {
     flex: unset;
     width: 15em;
+    @include tablet-down {
+        width: 1em;
+    }
 }
 // .panel .grid {
 //     display: grid;

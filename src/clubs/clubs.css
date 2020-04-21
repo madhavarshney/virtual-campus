@@ -107,16 +107,20 @@ body {
 
 .quicknav {
   display: flex;
+  flex-flow: row wrap;
   justify-content: center;
   padding: 1rem 0 3rem 0;
 
-  display: grid;
-  // TODO: investigate alternative
-  // NOTE: 0.5rem is subtracted for having two rows on iPhone SE
-  grid-template-columns: repeat(auto-fit, minmax(9.5rem, auto));
-  justify-content: center;
-  gap: 1em;
-  grid-gap: 1em;
+  // display: grid;
+  // // TODO: investigate alternative
+  // // NOTE: 0.5rem is subtracted for having two rows on iPhone SE
+  // grid-template-columns: repeat(auto-fit, minmax(9.5rem, auto));
+  // justify-content: center;
+  // gap: 1em;
+  // grid-gap: 1em;
+}
+.quicknav > button, .quicknav > a {
+  margin: 0.3em;
 }
 .quicknav button {
   @include reset-button;
@@ -138,6 +142,7 @@ body {
 .quicknav a {
   text-decoration: none;
   color: white;
+  height: 100%;
 }
 .quicknav button svg {
   width: 5em;
