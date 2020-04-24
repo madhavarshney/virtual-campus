@@ -7,7 +7,7 @@ let max;
 function incrementSlide() {
   if (curSlide >= max) {
     // curSlide = 0;
-    document.documentElement.classList.toggle('tour');
+    closeTour();
     return false;
   } else {
     curSlide++;
@@ -87,8 +87,10 @@ function onUpdateSlide() {
     handler && handler(slide);
   }
 
+  // TODO: find a better cross-platform method
+  const firstEl = document.querySelector('.tour .slide.visible .step > :first-child');
+  firstEl.scrollIntoView({ block: 'end' });
   setHash();
-  window.scrollTo(0,0);
 }
 
 function restore() {
@@ -108,15 +110,23 @@ function init() {
 
 init();
 
-window.addEventListener('keydown', (e) => {
+window.closeTour = function closeTour() {
+  document.documentElement.classList.toggle('tour');
+  window.removeEventListener('keydown', onKeyPress);
+  handlers.exitZoomTour();
+}
+
+function onKeyPress(e) {
   if (e.keyCode === 37) {
     prevSlide();
   } else if (e.keyCode === 39) {
     nextSlide();
   } else if (e.keyCode === 27) {
-    document.documentElement.classList.toggle('tour');
+    closeTour();
   }
-});
+};
+
+window.addEventListener('keydown', onKeyPress);
 
 // window.onload = () => init();
 
@@ -136,8 +146,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-window.toggleHours = function toggleHours(elId) {
-  const el = document.getElementById(elId);
+window.toggleTourHours = function toggleHours(elId) {
+  const el = document.querySelector(`.tour.container #${elId}`);
   if (el) {
     el.classList.toggle("hours-visible");
   }
@@ -153,7 +163,8 @@ function createCard({
 }) {
   const el = document.createElement("div");
   if (!placeholder) {
-    el.id = name;
+    const id = name.replace("'", "\\").replace(/ /g, '-');
+    el.id = id;
     el.className = "card";
     el.innerHTML = `
 ${img ? `<div class="avatar"><img src=${img}></div>` : ""}
@@ -163,10 +174,7 @@ ${img ? `<div class="avatar"><img src=${img}></div>` : ""}
   <a target='_blank' href='${zoomLink}'>
     <button class='primary-action'>Join Zoom</button>
   </a>
-  <button onclick="toggleHours('${name.replace(
-    "'",
-    "\\"
-  )}')">Hours</button>
+  <button onclick="toggleTourHours('${id}')">Hours</button>
 </div>
 <div class="description">${description}</div>
 <div class='hours-info'>

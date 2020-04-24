@@ -309,6 +309,10 @@ body {
   width: 30%;
   height: 100%;
   padding: 1em;
+
+  @include phone-down {
+    display: none;
+  }
 }
 .window .side .participant-panel {
   display: flex;
