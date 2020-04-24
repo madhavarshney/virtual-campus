@@ -84,7 +84,7 @@
       <div class="step">
         <div class="info">
           <h2>Learn How to Use Zoom</h2>
-          <h3>Take this interactive tutorial:</h3>
+          <h3>Follow this interactive tutorial:</h3>
         </div>
         <div style="height: 70vh">
           <%- include ../partials/zoom.html -%>
@@ -163,7 +163,7 @@
       </div>
     </div>
     <div class="slide">
-      <div class="step">
+      <div class="step end">
         <div class="info">
           <h2>The End...</h2>
           <h3>
@@ -182,7 +182,11 @@
     </div>
   </div>
   <div class="slides-toolbar">
+    <div class="spacer">
+      <button class="close" onclick="closeTour()">✕</button>
+    </div>
     <button onclick="nextSlide()">&gt;</button>
+    <div class="spacer"></div>
   </div>
   <!-- <div class="slides-toolbar bottom">
     <button onclick="prevSlide()">&lt;</button>

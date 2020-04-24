@@ -82,29 +82,9 @@
     }
   }
 
-  .step.services, .step.psych, .step.virtual-life, .step.counseling {
+  .step.services, .step.psych, .step.virtual-life, .step.counseling, .step.end {
     img {
       border: solid 4px white;
-    }
-  }
-}
-.slide .step.tech {
-  @include phone-up {
-    .row {
-      display: flex;
-      justify-content: center;
-      .card {
-        max-width: 25em;
-      }
-    }
-  }
-}
-.slide .step.updates-more {
-  @include tablet-up {
-    .row {
-      display: grid;
-      justify-content: center;
-      grid-template-columns: repeat(2, minmax(18em, 25em));
     }
   }
 }
@@ -153,7 +133,15 @@
   }
 
   &:not(.bottom):not(.nav) {
+    flex-direction: column;
+    justify-content: center;
     height: 100vh;
+
+    button.close {
+      background: none;
+      color: white;
+      margin-top: 1rem;
+    }
     @include tablet-down {
       display: none;
     }
@@ -244,6 +232,27 @@ iframe {
     padding: 0 0.5em;
     width: 90%;
     height: auto;
+  }
+}
+
+.slide .step.tech {
+  @include phone-up {
+    .row {
+      display: flex;
+      justify-content: center;
+      .card {
+        max-width: 25em;
+      }
+    }
+  }
+}
+.slide .step.updates-more {
+  @include tablet-up {
+    .row {
+      display: grid;
+      justify-content: center;
+      grid-template-columns: repeat(2, minmax(18em, 25em));
+    }
   }
 }
 
