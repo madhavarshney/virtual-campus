@@ -35,6 +35,7 @@ module.exports = function (source) {
   // }
 
   var template = ejs.compile(source, options);
+  template.dependencies.forEach(this.dependency.bind(this));
   // var minimize = this._compiler.options.optimization.minimize;
 
   // if (!minimize && options.beautify !== false) {
