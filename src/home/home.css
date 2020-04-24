@@ -27,13 +27,13 @@
   padding: 0 1rem;
 }
 .header {
-  /* height: 80vh; */
+  min-height: calc(100vh - 20vw);
   width: 100%;
   /* padding: 0 0 4rem 0; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
   text-align: center;
   background: $theme-gradient;
   background-position: 50%;

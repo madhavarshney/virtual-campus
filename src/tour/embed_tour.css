@@ -16,7 +16,7 @@
 // }
 .tour nav {
   z-index: 3;
-  padding: 1em 2em;
+  padding: 1em;
   background: $theme-gradient;
   color: white;
   align-items: center;
@@ -24,9 +24,12 @@
   display: none;
   font-size: 1.2em;
 
+  img {
+    height: 2rem;
+  }
   @include tablet-down {
     display: flex;
-    box-shadow: 0px 2px 4px 0px #7d252f;
+    box-shadow: 0px 4px 6px 0px #8a2732;
     // border-bottom: solid 2px #aaa;
     position: sticky;
     top: 0;
