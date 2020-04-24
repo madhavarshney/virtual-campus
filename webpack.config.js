@@ -25,6 +25,17 @@ const templateParams = {
   description: `An easy-to-use information center for Foothill's virtual campus.`,
   websiteUrl: base,
 };
+const htmlMinifyOptions = !prod ? false : {
+  // Default
+  collapseWhitespace: true,
+  removeComments: true,
+  removeRedundantAttributes: true,
+  removeScriptTypeAttributes: true,
+  removeStyleLinkTypeAttributes: true,
+  useShortDoctype: true,
+  // Additional
+  conservativeCollapse: true,
+};
 
 module.exports = {
   mode,
@@ -86,24 +97,28 @@ module.exports = {
       chunks: ['home'],
       template: 'src/home/home.html',
       filename: 'index.html',
+      minify: htmlMinifyOptions,
       ...templateParams,
     }),
     new HtmlWebpackPlugin({
       chunks: ['clubs'],
       template: 'src/clubs/clubs.html',
       filename: 'clubs/index.html',
+      minify: htmlMinifyOptions,
       ...templateParams,
     }),
     new HtmlWebpackPlugin({
       chunks: ['clubday'],
       template: 'src/clubday/clubday.html',
       filename: 'club-day/index.html',
+      minify: htmlMinifyOptions,
       ...templateParams,
     }),
     new HtmlWebpackPlugin({
       chunks: ['tour'],
       template: 'src/tour/tour.html',
       filename: 'tour/index.html',
+      minify: htmlMinifyOptions,
       ...templateParams,
     }),
     new MiniCssExtractPlugin({
