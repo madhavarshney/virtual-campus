@@ -90,6 +90,14 @@
       border: solid 4px white;
     }
   }
+  .step.interactive-zoom {
+    h2 {
+      margin-bottom: 0.5em;
+    }
+    .zm-container {
+      padding-top: 0;
+    }
+  }
 }
 .slide .step .info {
   padding: 1em;

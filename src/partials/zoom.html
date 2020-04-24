@@ -24,52 +24,20 @@
         <div class="top-bar">
           <span class="spacer"></span>
           <div
-            data-step="5"
-            data-intro="Click this button to change the view of participants."
+            data-step="6"
+            data-intro="Click this button to change how the participants are shown. Try it!"
           >
-            <button class="toggle-view" onclick="toggleView()"></button>
+            <button class="toggle-view" onclick="goToNext(6); toggleView()"></button>
           </div>
         </div>
-        <div class="participants gallery">
-          <div class="vid">
-            <img
-              onload="fadeImg(event)"
-              src="https://picsum.photos/900/600?1"
-            />
-          </div>
-          <div class="vid">
-            <img
-              onload="fadeImg(event)"
-              src="https://picsum.photos/900/600?2"
-            />
-          </div>
-          <div class="vid">
-            <img
-              onload="fadeImg(event)"
-              src="https://picsum.photos/900/600?3"
-            />
-          </div>
-          <div class="vid active">
-            <img
-              onload="fadeImg(event)"
-              src="https://picsum.photos/900/600?4"
-            />
-          </div>
-          <div class="vid">
-            <img
-              onload="fadeImg(event)"
-              src="https://picsum.photos/900/600?5"
-            />
-          </div>
-          <div class="vid">
-            <img
-              onload="fadeImg(event)"
-              src="https://picsum.photos/900/600?6"
-            />
-          </div>
-        </div>
-        <div class="participants speaker">
-          <div class="strip">
+        <div
+          class="participants-container"
+          data-step="5"
+          data-intro="In the center of your screen, you can see the videos of participants."
+        >
+          <div
+            class="participants gallery"
+          >
             <div class="vid">
               <img
                 onload="fadeImg(event)"
@@ -88,12 +56,52 @@
                 src="https://picsum.photos/900/600?3"
               />
             </div>
+            <div class="vid active">
+              <img
+                onload="fadeImg(event)"
+                src="https://picsum.photos/900/600?4"
+              />
+            </div>
+            <div class="vid">
+              <img
+                onload="fadeImg(event)"
+                src="https://picsum.photos/900/600?5"
+              />
+            </div>
+            <div class="vid">
+              <img
+                onload="fadeImg(event)"
+                src="https://picsum.photos/900/600?6"
+              />
+            </div>
           </div>
-          <div class="vid main-speaker">
-            <img
-              onload="fadeImg(event)"
-              src="https://picsum.photos/900/600?4"
-            />
+          <div class="participants speaker">
+            <div class="strip">
+              <div class="vid">
+                <img
+                  onload="fadeImg(event)"
+                  src="https://picsum.photos/900/600?1"
+                />
+              </div>
+              <div class="vid">
+                <img
+                  onload="fadeImg(event)"
+                  src="https://picsum.photos/900/600?2"
+                />
+              </div>
+              <div class="vid">
+                <img
+                  onload="fadeImg(event)"
+                  src="https://picsum.photos/900/600?3"
+                />
+              </div>
+            </div>
+            <div class="vid main-speaker">
+              <img
+                onload="fadeImg(event)"
+                src="https://picsum.photos/900/600?4"
+              />
+            </div>
           </div>
         </div>
         <div
@@ -101,26 +109,30 @@
           data-step="2"
           data-intro="This is the toolbar. You can mute your audio, mute your video, and do much more."
         >
-          <div data-step="3" data-intro="Click this button to unmute!">
-            <button><img src="assets/zoom/mute.svg" />Mute</button>
+          <div data-step="3" data-intro="Click this button to unmute. Try it!">
+            <button onclick="goToNext(3)"><img src="assets/zoom/mute.svg" />Mute</button>
           </div>
           <div
             data-step="4"
-            data-intro="Click this button to start your video."
+            data-intro="Click this button to start your video. Try it!"
           >
-            <button><img src="assets/zoom/film.svg" />Video</button>
+            <button onclick="goToNext(4)"><img src="assets/zoom/film.svg" />Video</button>
           </div>
           <span class="spacer"></span>
           <div
-            data-step="6"
+            data-step="8"
             data-tooltipClass="tooltip__last"
-            data-intro="Click this button to leave the meeting."
+            data-intro="Click this button to leave the meeting. Try it!"
           >
-            <button class="leave">Leave Meeting</button>
+            <button class="leave" onclick="goToNext(8)">Leave Meeting</button>
           </div>
         </div>
       </div>
-      <div class="side">
+      <div
+        class="side"
+        data-step="7"
+        data-intro="This panel lists the participants in the call."
+      >
         <div class="participant-panel">
           <div class="title">Participants (2)</div>
           <div class="list">
@@ -151,6 +163,12 @@
     if (instance) {
       instance.exit();
       instance = null;
+    }
+  }
+  function goToNext(num) {
+    let cur = instance && instance._currentStep;
+    if (instance && cur === (num - 1)) {
+      instance.nextStep();
     }
   }
 </script>

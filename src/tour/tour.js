@@ -48,8 +48,8 @@ const handlers = {
       document.querySelector('.zm-container').scrollIntoView({ behavior: 'smooth' });
       timeout = setTimeout(() => {
         window.startZoomTour();
-      }, 1000);
-    }, 1000);
+      }, 600);
+    }, 600);
   },
   exitZoomTour: () => {
     timeout && clearTimeout(timeout);

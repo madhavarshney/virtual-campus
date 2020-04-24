@@ -27,6 +27,9 @@
 }
 
 .introjs-bullets ul li a.active {
+  outline: none;
+}
+.introjs-bullets ul li a.active {
   background: #08c;
   transform: scale(1.1);
 }
@@ -381,8 +384,12 @@ body {
   outline: none;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.4);
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), black;
   }
+}
+.window .participants-container {
+  flex: 1;
+  overflow: hidden;
 }
 .window.gallery .participants.gallery {
   display: grid;
@@ -391,7 +398,8 @@ body {
   display: none;
 }
 .window .participants.gallery {
-  flex: 1;
+  // flex: 1;
+  height: 100%;
   display: none;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.5em;
@@ -400,7 +408,8 @@ body {
   overflow: auto;
 }
 .window .participants.speaker {
-  flex: 1;
+  // flex: 1;
+  height: 100%;
   display: flex;
   flex-direction: column;
   /* grid-template-columns: repeat(3, 1fr); */
@@ -462,7 +471,7 @@ body {
   justify-content: center;
 }
 .window .bottom-bar button:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), black;
 }
 .window .bottom-bar button img {
   margin-bottom: 1em;
