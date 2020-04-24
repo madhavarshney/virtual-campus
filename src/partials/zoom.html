@@ -1,0 +1,157 @@
+<div class="zm-container">
+  <div
+    class="window"
+    data-step="1"
+    data-intro="Welcome to Zoom. This is how your Zoom window will look like."
+  >
+    <div class="title-bar">
+      <div class="btns">
+        <div class="close">
+          <a class="closebutton" href="#">x</a>
+        </div>
+        <div class="minimize">
+          <a class="minimizebutton" href="#">&ndash;</a>
+        </div>
+        <div class="zoom">
+          <a class="zoombutton" href="#">+</a>
+        </div>
+      </div>
+      <span>Zoom Meeting ID: XXX</span>
+      <span class="spacer"></span>
+    </div>
+    <div class="window-content">
+      <div class="left">
+        <div class="top-bar">
+          <span class="spacer"></span>
+          <div
+            data-step="5"
+            data-intro="Click this button to change the view of participants."
+          >
+            <button class="toggle-view" onclick="toggleView()"></button>
+          </div>
+        </div>
+        <div class="participants gallery">
+          <div class="vid">
+            <img
+              onload="fadeImg(event)"
+              src="https://picsum.photos/900/600?1"
+            />
+          </div>
+          <div class="vid">
+            <img
+              onload="fadeImg(event)"
+              src="https://picsum.photos/900/600?2"
+            />
+          </div>
+          <div class="vid">
+            <img
+              onload="fadeImg(event)"
+              src="https://picsum.photos/900/600?3"
+            />
+          </div>
+          <div class="vid active">
+            <img
+              onload="fadeImg(event)"
+              src="https://picsum.photos/900/600?4"
+            />
+          </div>
+          <div class="vid">
+            <img
+              onload="fadeImg(event)"
+              src="https://picsum.photos/900/600?5"
+            />
+          </div>
+          <div class="vid">
+            <img
+              onload="fadeImg(event)"
+              src="https://picsum.photos/900/600?6"
+            />
+          </div>
+        </div>
+        <div class="participants speaker">
+          <div class="strip">
+            <div class="vid">
+              <img
+                onload="fadeImg(event)"
+                src="https://picsum.photos/900/600?1"
+              />
+            </div>
+            <div class="vid">
+              <img
+                onload="fadeImg(event)"
+                src="https://picsum.photos/900/600?2"
+              />
+            </div>
+            <div class="vid">
+              <img
+                onload="fadeImg(event)"
+                src="https://picsum.photos/900/600?3"
+              />
+            </div>
+          </div>
+          <div class="vid main-speaker">
+            <img
+              onload="fadeImg(event)"
+              src="https://picsum.photos/900/600?4"
+            />
+          </div>
+        </div>
+        <div
+          class="bottom-bar"
+          data-step="2"
+          data-intro="This is the toolbar. You can mute your audio, mute your video, and do much more."
+        >
+          <div data-step="3" data-intro="Click this button to unmute!">
+            <button><img src="assets/zoom/mute.svg" />Mute</button>
+          </div>
+          <div
+            data-step="4"
+            data-intro="Click this button to start your video."
+          >
+            <button><img src="assets/zoom/film.svg" />Video</button>
+          </div>
+          <span class="spacer"></span>
+          <div
+            data-step="6"
+            data-tooltipClass="tooltip__last"
+            data-intro="Click this button to leave the meeting."
+          >
+            <button class="leave">Leave Meeting</button>
+          </div>
+        </div>
+      </div>
+      <div class="side">
+        <div class="participant-panel">
+          <div class="title">Participants (2)</div>
+          <div class="list">
+            <div class="item"><img src="https://api.adorable.io/avatars/40/a23.png">Footsi Anza</div>
+            <div class="item"><img src="https://api.adorable.io/avatars/40/a123.png">Anza De Foothill</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/intro.js@2.9.3/minified/intro.min.js"></script>
+<script>
+  let instance = null;
+  function fadeImg() {
+    event.target.style.transition = "opacity 2s";
+    event.target.style.opacity = "1";
+  }
+  function toggleView() {
+    document.querySelector(".window").classList.toggle("gallery");
+  }
+  function startZoomTour() {
+    instance = introJs()
+      .setOption("showProgress", true)
+      .setOption("keyboardNavigation", false);
+    instance.start();
+  }
+  function stopZoomTour() {
+    if (instance) {
+      instance.exit();
+      instance = null;
+    }
+  }
+</script>

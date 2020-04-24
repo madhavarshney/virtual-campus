@@ -1,0 +1,344 @@
+@import '../utils/zoom.css';
+
+.slides {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.root {
+  @include tablet-up {
+    height: 100%;
+  }
+  display: flex;
+  flex-direction: column;
+  /* padding-bottom: 2em; */
+}
+nav {
+  z-index: 3;
+  padding: 1em 2em;
+  background: $theme-gradient;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @include tablet-down {
+    box-shadow: 0px 2px 4px 0px #7d252f;
+    // border-bottom: solid 2px #aaa;
+    position: sticky;
+    top: 0;
+  }
+}
+footer {
+  margin-top: 0;
+  background-color: $theme-footer;
+  color: $theme-footer-text;
+  text-align: center;
+
+  margin-top: 4em;
+  padding: 4em 2em;
+}
+h2 {
+  font-size: 2.5em;
+  text-align: center;
+}
+h3 {
+  font-size: 1.5em;
+  text-align: center;
+  margin-bottom: 2em;
+}
+.header-svg {
+  width: 100%;
+  /* TODO: investigate whether vw is the best unit */
+  height: 20vw;
+  margin-top: -1px;
+}
+.container {
+  color: white;
+  background: $theme-gradient;
+  display: flex;
+  @include tablet-up {
+    flex-direction: row;
+    padding: 0.5em 2em;
+  }
+  @include tablet-down {
+    flex-direction: column;
+    // padding: 0.5em;
+  }
+  transition: height 1s;
+}
+.slides {
+  flex: 1;
+  position: relative;
+}
+.slide {
+  position: absolute;
+  width: 100%;
+  /* height: 100%; */
+  visibility: hidden;
+  /* overflow: auto; */
+  max-height: 0;
+  overflow: hidden;
+
+  @include tablet-down {
+    padding-bottom: 4em;
+  }
+}
+.slide .step.services img, .slide .step.psych img {
+  border: solid 4px white;
+}
+.slide .step.tech {
+  @include phone-up {
+    .row {
+      display: flex;
+      justify-content: center;
+      .card {
+        max-width: 25em;
+      }
+    }
+  }
+}
+.slide .step.updates-more {
+  @include tablet-up {
+    .row {
+      display: grid;
+      justify-content: center;
+      grid-template-columns: repeat(2, minmax(18em, 25em));
+    }
+  }
+}
+.slide .step .info {
+  padding: 1em;
+}
+.slide.visible {
+  max-height: unset;
+  animation: fadeFromLeft 0.6s;
+  visibility: visible;
+}
+.slides-toolbar {
+  display: flex;
+  align-items: center;
+  z-index: 2;
+  /* padding: 0 1em 1em 1em; */
+
+  &.nav {
+    display: inline-flex;
+    button {
+      &:first-child {
+        margin-right: 1em;
+      }
+      height: 1.5em;
+      width: 1.5em;
+    }
+    @include tablet-up {
+      display: none;
+    }
+  }
+
+  &.bottom {
+    justify-content: space-between;
+    padding: 1em 0.4em;
+    @include tablet-up {
+      display: none;
+    }
+  }
+
+  &:not(.bottom):not(.nav) {
+    height: 100vh;
+    @include tablet-down {
+      display: none;
+    }
+  }
+}
+.slides-toolbar button {
+  background-color: white;
+  border-radius: 50%;
+  height: 2em;
+  width: 2em;
+  font-size: 1.5em;
+  /* padding: 0; */
+  line-height: 1;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+@keyframes fadeFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-0.5em);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(0.3em);
+    visibility: hidden;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.slide.visible .step h3 {
+  animation: fadeUp backwards 0.4s 0.3s;
+}
+.slide.visible .step img.large-emoji,
+.slide.visible .step iframe {
+  animation: fadeUp backwards 0.4s 1s;
+}
+.step img.large-emoji {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+  max-height: 40vh;
+  border-radius: 1em;
+}
+.step a {
+  color: rgb(255, 213, 0);
+}
+iframe {
+  display: block;
+  margin: auto;
+  width: 80vmin;
+  height: 45vmin;
+}
+
+.content {
+  color: black;
+  padding: 0rem 2rem 4rem 2rem;
+  @include tablet-down {
+    padding: 1rem 1.5rem;
+  }
+}
+.content h2 {
+  margin-top: 0;
+  font-size: 2rem;
+}
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(21rem, 1fr));
+  grid-gap: 16px;
+  gap: 16px;
+}
+
+.swiper-container {
+  margin: -1.9em -1.9em;
+  padding: 3em 2em;
+  /* // TODO: investigate possible regressions !!! */
+  box-sizing: border-box;
+}
+.swiper-slide {
+  padding: 0 0.5em;
+  width: 90%;
+  height: auto;
+}
+
+.slide.visible .card:nth-child(1) {
+  animation-delay: 1s;
+}
+.slide.visible .card:nth-child(2) {
+  animation-delay: 1.2s;
+}
+.slide.visible .card:nth-child(3) {
+  animation-delay: 1.4s;
+}
+.slide.visible .card {
+  animation: fadeUp backwards 0.6s 1s;
+}
+.card {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  flex: 1;
+  line-height: 1.8;
+  transition: transform 0.2s, box-shadow 0.2s, -webkit-transform 0.2s;
+  box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07),
+    0 2px 9px 0 rgba(62, 57, 107, 0.06);
+
+  @include phone-down {
+    padding: 2rem 1.5rem;
+  }
+}
+@include tablet-up {
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 32px 0 rgba(62,57,107,.28), 0 0 0 transparent;
+  }
+}
+.card .avatar {
+  width: 100%;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+.card img {
+  width: 30%;
+  border-radius: 50%;
+}
+.card .title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.card .description {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+.card .hours-info {
+  padding-top: 1rem;
+}
+.card.hours-visible .hours {
+  max-height: 400px;
+}
+.card .hours {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-gap: 1rem;
+  gap: 0.5rem 1rem;
+
+  max-height: 0;
+  transition: max-height 0.5s ease-in-out;
+  overflow: hidden;
+}
+.card .hours-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding-bottom: 0.5rem;
+}
+.card .room-info {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+.card button {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: #ddd;
+  transition: background-color 0.1s;
+}
+.card button:hover {
+  background-color: #ccc;
+}
+.card .primary-action {
+  color: white;
+  background-color: #58b947;
+}
+.card .primary-action:hover {
+  background-color: rgb(71, 148, 57);
+}
+.card a {
+  text-decoration: none;
+  color: white;
+}
+

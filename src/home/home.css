@@ -1,5 +1,6 @@
 @import '../../node_modules/swiper/css/swiper.min.css';
 @import '../utils/base.css';
+@import '../tour/embed_tour.css';
 
 .navbar {
   display: flex;
@@ -233,10 +234,32 @@ svg {
   display: block;
 }
 .modal {
-  position: fixed;
+  // position: fixed;
   width: 100%;
   height: 100%;
+  top: 0;
+  padding: 4em;
+  background: rgb(85, 85, 85);
   overscroll-behavior: contain;
+  display: none;
+}
+.modal .container {
+  border-radius: 1em;
+  height: 100%;
+  overflow: auto;
+  box-shadow: 0px 0px 2em 0px rgb(64, 64, 64);
+}
+html.tour, html.tour body {
+  height: 100%;
+}
+html.tour body .all {
+  display: none;
+}
+html.tour .modal {
+  display: block;
+}
+.slides-toolbar:not(.bottom):not(.nav) {
+  height: calc(100vh - 9em);
 }
 .modal-content {
   background-color: white;

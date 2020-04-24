@@ -1,15 +1,137 @@
 import { Swiper } from 'swiper/js/swiper.esm';
-import '../tour/tour.js';
 
-const supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+const SAVE_SLIDE = false;
+let curSlide = -1;
+let max;
+
+function incrementSlide() {
+  if (curSlide >= max) {
+    // curSlide = 0;
+    document.documentElement.classList.toggle('tour');
+    return false;
+  } else {
+    curSlide++;
+  }
+  return true;
+}
+function decrementSlide() {
+  if (curSlide <= 0) {
+    // curSlide = max;
+    return false;
+  } else {
+    curSlide--;
+  }
+  return true;
+}
+
+window.prevSlide = function prevSlide() {
+  decrementSlide() && onUpdateSlide();
+}
+window.nextSlide = function nextSlide() {
+  incrementSlide() && onUpdateSlide();
+}
+
+function resize() {
+  const container = document.querySelector(".container");
+  const bottomBar = document.querySelector(".slides-toolbar.bottom");
+  const slides = document.querySelectorAll(".slides .slide");
+  container.style.height =
+    slides[curSlide].clientHeight +
+    // bottomBar.clientHeight +
+    "px";
+}
+
+let timeout;
+const handlers = {
+  zoomTour: () => {
+    timeout = setTimeout(() => {
+      document.querySelector('.zm-container').scrollIntoView({ behavior: 'smooth' });
+      timeout = setTimeout(() => {
+        window.startZoomTour();
+      }, 1000);
+    }, 1000);
+  },
+  exitZoomTour: () => {
+    timeout && clearTimeout(timeout);
+    window.stopZoomTour();
+  },
+  stopVideo: (slide) => {
+    const videos = slide.querySelectorAll('iframe.video') || [];
+    for (let i = 0; i < videos.length; i++) {
+      videos[i].src = videos[i].src;
+    }
+  },
+};
+
+function setHash() {
+  if (!SAVE_SLIDE) return false;
+  window.location.hash = curSlide > 0 ? (curSlide + 1) : '';
+}
+
+function onUpdateSlide() {
+  const container = document.querySelector(".container");
+  const slides = document.querySelectorAll(".slides .slide");
+
+  for (let i = 0; i < slides.length; i++) {
+    const slide = slides[i];
+    const handler = handlers[slide.dataset[i === curSlide ? 'show' : 'hide']];
+
+    if (i === curSlide) {
+      slide.classList.add("visible");
+      // container.style.height = slide.clientHeight + "px";
+      // slide.focus();
+    } else if (slides[i].classList.contains("visible")) {
+      slide.classList.remove("visible");
+    }
+
+    handler && handler(slide);
+  }
+
+  setHash();
+  window.scrollTo(0,0);
+}
+
+function restore() {
+  if (!SAVE_SLIDE) return;
+  curSlide = window.location.hash.replace(/#/g, '');
+  curSlide = (parseInt(curSlide) - 2) || -1;
+}
+
+function init() {
+  const slides = document.querySelectorAll(".slides .slide");
+  max = slides.length - 1;
+  restore();
+  nextSlide();
+  // window.addEventListener('resize', resize);
+  // setTimeout(resize, 1000);
+}
+
+init();
+
+window.addEventListener('keydown', (e) => {
+  if (e.keyCode === 37) {
+    prevSlide();
+  } else if (e.keyCode === 39) {
+    nextSlide();
+  } else if (e.keyCode === 27) {
+    document.documentElement.classList.toggle('tour');
+  }
+});
+
+// window.onload = () => init();
+
+// import { Swiper } from "swiper/js/swiper.esm";
+
+const supportsTouch =
+  "ontouchstart" in window || navigator.msMaxTouchPoints;
 const enableSwiper = supportsTouch;
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
+  anchor.addEventListener("click", function(e) {
     e.preventDefault();
 
-    document.querySelector(this.getAttribute('href')).scrollIntoView({
-      behavior: 'smooth',
+    document.querySelector(this.getAttribute("href")).scrollIntoView({
+      behavior: "smooth"
     });
   });
 });
@@ -17,37 +139,47 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 window.toggleHours = function toggleHours(elId) {
   const el = document.getElementById(elId);
   if (el) {
-    el.classList.toggle('hours-visible');
+    el.classList.toggle("hours-visible");
   }
 };
 
-function createCard({ name = '', description = '', zoomLink, hoursHtml, img, placeholder = false }) {
-  const el = document.createElement('div');
+function createCard({
+  name = "",
+  description = "",
+  zoomLink,
+  hoursHtml,
+  img,
+  placeholder = false
+}) {
+  const el = document.createElement("div");
   if (!placeholder) {
     el.id = name;
-    el.className = 'card';
+    el.className = "card";
     el.innerHTML = `
-      ${img ? `<div class="avatar"><img src=${img}></div>` : ''}
-      <div class="title">${name}</div>
-      <div class='room-info'>
-        <strong>Room: </strong>
-        <a target='_blank' href='${zoomLink}'>
-          <button class='primary-action'>Join Zoom</button>
-        </a>
-        <button onclick="toggleHours('${name.replace('\'', '\\')}')">Hours</button>
-      </div>
-      <div class="description">${description}</div>
-      <div class='hours-info'>
-        ${hoursHtml}
-      </div>
-    `;
+${img ? `<div class="avatar"><img src=${img}></div>` : ""}
+<div class="title">${name}</div>
+<div class='room-info'>
+  <strong>Room: </strong>
+  <a target='_blank' href='${zoomLink}'>
+    <button class='primary-action'>Join Zoom</button>
+  </a>
+  <button onclick="toggleHours('${name.replace(
+    "'",
+    "\\"
+  )}')">Hours</button>
+</div>
+<div class="description">${description}</div>
+<div class='hours-info'>
+  ${hoursHtml}
+</div>
+`;
   }
   if (enableSwiper) {
     if (placeholder) {
       return null;
     }
-    const slide = document.createElement('div');
-    slide.className = 'swiper-slide';
+    const slide = document.createElement("div");
+    slide.className = "swiper-slide";
     slide.appendChild(el);
     return slide;
   } else {
@@ -56,16 +188,15 @@ function createCard({ name = '', description = '', zoomLink, hoursHtml, img, pla
 }
 
 function generateHours(data) {
-  const row = (a = '', b = '', c = '') => `<span>${a}</span> <span>${b}</span> <span>${c}</span>`;
+  const row = (a = "", b = "", c = "") =>
+    `<span>${a}</span> <span>${b}</span> <span>${c}</span>`;
 
   return `
-    <div class='hours'>
-      <div class='hours-title'>Hours:</div><span>From</span><span>To</span>
-      ${data.map((d) => (
-        row(...d)
-      )).join('\n')}
-    </div>
-  `;
+<div class='hours'>
+<div class='hours-title'>Hours:</div><span>From</span><span>To</span>
+${data.map(d => row(...d)).join("\n")}
+</div>
+`;
 }
 
 const data = {
@@ -212,30 +343,23 @@ const data = {
 function createSwiper(query, d) {
   if (enableSwiper) {
     const container = document.querySelector(`${query} .row`);
-    container.className = 'swiper-container'; // intentionally replace .row
+    container.className = "swiper-container"; // intentionally replace .row
 
-    const wrapper = document.createElement('wrapper');
-    wrapper.className = 'swiper-wrapper';
+    const wrapper = document.createElement("wrapper");
+    wrapper.className = "swiper-wrapper";
     container.appendChild(wrapper);
 
-    wrapper.append(...d.map((c) => createCard(c)).filter((c) => c));
+    wrapper.append(...d.map(c => createCard(c)).filter(c => c));
     new Swiper(container, {
-      slidesPerView: 'auto',
+      slidesPerView: "auto"
     });
   } else {
     document
       .querySelector(`${query} .row`)
-      .append(...d.map((c) => createCard(c)));
+      .append(...d.map(c => createCard(c)));
   }
 }
 
-let initStarted = false;
-
-document.addEventListener('DOMContentLoaded', () => {
-  if (initStarted) { return; }
-  initStarted = true;
-
-  createSwiper('#tutoring', data.tutoring);
-  createSwiper('#tech-help', data.techHelp);
-  createSwiper('#stay-connected', data.stayConnected);
-});
+createSwiper(".tour.container #tutoring", data.tutoring);
+createSwiper(".tour.container #tech-help", data.techHelp);
+createSwiper(".tour.container #stay-connected", data.stayConnected);

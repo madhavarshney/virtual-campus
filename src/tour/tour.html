@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ../partials/meta.html -%>
+    <title>Tour | Foothill Virtual Campus</title>
+    <meta name="description" content="Take a tour of Foothill's Virtual Campus`.">
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:300,400,800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/intro.js@2.9.3/minified/introjs.min.css"
+    />
+  </head>
+  <body>
+    <div class="root">
+    <nav>
+      Foothill College
+      <div class="slides-toolbar nav">
+        <button onclick="prevSlide()"><</button>
+        <button onclick="nextSlide()">></button>
+      </div>
+    </nav>
+    <div class="container tour">
+      <div class="slides-toolbar">
+        <button onclick="prevSlide()"><</button>
+      </div>
+      <div class="slides">
+        <div class="slide">
+          <div class="step one">
+            <div class="info">
+              <h2>Welcome to Foothill's Virtual Campus</h2>
+              <h3>I am your assistant for today. Let's get started!</h3>
+            </div>
+            <img class="large-emoji" src="https://media.giphy.com/media/T9uDcSZiPElXQopwWr/giphy.gif" />
+          </div>
+        </div>
+        <div class="slide">
+          <div class="step one">
+            <div class="info">
+              <h2>Virtual Life at Foothill</h2>
+              <h3>Foothill's events, activities, and services are still active! <br> This tour will go through what we have to offer.</h3>
+            </div>
+            <img class="large-emoji" src="https://media.giphy.com/media/CaiVJuZGvR8HK/giphy.gif" />
+          </div>
+        </div>
+        <div class="slide">
+          <div class="step one">
+            <div class="info">
+              <h2>Events at Foothill</h2>
+              <h3>This month, April 2020, we're celebrating Asian Pacific Islander Month. <br> Check it out at <a href="https://foothill.edu/heritage/api.html">foothill.edu/heritage/api.html</a>.</h3>
+            </div>
+            <img class="large-emoji" src="assets/tour/api-month.jpg" />
+            <!-- <img class="large-emoji" src="assets/tour/latinx-heritage-month.jpg" /> -->
+          </div>
+        </div>
+        <div class="slide">
+          <div class="step updates-more">
+            <div class="info">
+              <h2>Get Updates & More</h2>
+              <h3>Join us on these weekly events!</h3>
+            </div>
+            <div id="stay-connected" class="content">
+              <div class="row"></div>
+            </div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="step tech">
+            <div class="info">
+              <h2>Tech Help</h2>
+              <h3>
+                We're doing our best to support students. <br> If you have any
+                tech-related questions, check out the following: <br>
+                <a href="https://foothill.edu/virtualcampus/tech-hub/">foothill.edu/virtualcampus/tech-hub/</a>
+              </h3>
+            </div>
+            <div id="tech-help" class="content">
+              <div class="row"></div>
+            </div>
+          </div>
+        </div>
+        <div class="slide" data-hide="stopVideo">
+          <div class="step">
+            <div class="info">
+              <h2>Need Help with Canvas?</h2>
+              <h3>Watch this video:</h3>
+            </div>
+            <iframe
+              class="video"
+              src="https://player.vimeo.com/video/74677642?title=0&byline=0&portrait=0"
+              frameborder="0"
+              allow="autoplay; fullscreen"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+        <div class="slide" data-show="zoomTour" data-hide="exitZoomTour">
+          <div class="step">
+            <div class="info">
+              <h2>Learn how to use Zoom</h2>
+              <h3>Take this interactive tutorial:</h3>
+            </div>
+            <div style="height: 70vh">
+              <%- include ../partials/zoom.html -%>
+            </div>
+            <!-- <iframe
+              style="width: 80%; height: 70vh"
+              src="https://x2y0u.csb.app/"
+              frameborder="0"
+            ></iframe> -->
+          </div>
+        </div>
+        <div class="slide" data-hide="stopVideo">
+          <div class="step">
+            <div class="info">
+              <h2>Zoom: Want more information?</h2>
+              <h3>Watch this video:</h3>
+            </div>
+            <iframe
+              class="video"
+              width="1383"
+              height="577"
+              src="https://www.youtube.com/embed/QH1DaJi6rNo"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="step services">
+            <div class="info">
+              <h2>Services</h2>
+              <h3>For Spring 2020, all of Foothill's services have moved online. Check them out!</h3>
+            </div>
+            <!-- <div style="display: flex;"> -->
+              <!-- <img class="large-emoji" src="https://media.giphy.com/media/jsHXlTn1O2NOuAHB7A/giphy.gif" /> -->
+              <img class="large-emoji" src="https://media.giphy.com/media/26FPJGjhefSJuaRhu/giphy.gif" />
+              <!-- <img class="large-emoji" src="https://www.animatedimages.org/data/media/385/animated-teacher-image-0002.gif" /> -->
+            <!-- </div> -->
+          </div>
+        </div>
+        <div class="slide">
+          <div class="step one">
+            <div class="info">
+              <h2>Tutoring</h2>
+              <h3>
+                Foothill has many tutoring services available. Check these out!
+              </h3>
+            </div>
+            <div id="tutoring" class="content">
+              <div class="row"></div>
+            </div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="step psych">
+            <div class="info">
+              <h2>Psychological Services</h2>
+              <h3>We're still here to help! <br> Get more information at <a href="https://foothill.edu/psychservices/">foothill.edu/psychservices/</a></h3>
+            </div>
+            <!-- <div style="display: flex;"> -->
+              <!-- <img class="large-emoji" src="https://media.giphy.com/media/jsHXlTn1O2NOuAHB7A/giphy.gif" /> -->
+              <img class="large-emoji" src="assets/tour/psych-services-team.jpg" />
+              <!-- <img class="large-emoji" src="https://www.animatedimages.org/data/media/385/animated-teacher-image-0002.gif" /> -->
+            <!-- </div> -->
+          </div>
+        </div>
+        <div class="slide">
+          <div class="step">
+            <div class="info">
+              <h2>The End...</h2>
+              <h3>
+                ...or just the start? For more information, visit
+                <a target="_blank" href="https://foothill.edu/virtualcampus/">
+                  foothill.edu/virtualcampus/
+                </a>
+              </h3>
+            </div>
+            <img
+              class="large-emoji"
+              src="https://media.giphy.com/media/47GTKznyEywUBLgR0x/giphy.gif"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="slides-toolbar">
+        <button onclick="nextSlide()">></button>
+      </div>
+      <!-- <div class="slides-toolbar bottom">
+        <button onclick="prevSlide()"><</button>
+        <button onclick="nextSlide()">></button>
+      </div> -->
+    </div>
+    <svg
+      class="header-svg"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1440 320"
+    >
+      <defs>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <!-- <stop offset="0%" style="stop-color:#A61E2F;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#ae122980;stop-opacity:1" /> -->
+          <stop offset="0%" style="stop-color:#921b29;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#bb2234;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <path
+        fill="url(#grad1)"
+        fill-opacity="1"
+        d="M0,224L48,218.7C96,213,192,203,288,176C384,149,480,107,576,122.7C672,139,768,213,864,229.3C960,245,1056,203,1152,202.7C1248,203,1344,245,1392,266.7L1440,288L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
+      ></path>
+    </svg>
+    </div>
+    <footer>
+      Website by Madhav Varshney
+    </footer>
+  </body>
+</html>
